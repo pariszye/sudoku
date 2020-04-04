@@ -1,0 +1,101 @@
+body {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+div {
+    background: #659494;
+    border-radius: 10px;
+    color: black;
+    font-family: arial, san-serif;
+    text-align: center;
+    padding: 30px;
+}
+
+.left {
+    padding-right: 30px;
+    width: 20%;
+    display: grid;
+    grid-template: auto;
+    grid-template-rows: 20% 70% 10%;
+}
+
+.right {
+    padding-left: 30px;
+    width: 70%;
+}
+
+h1 {
+    font-family: Montserrat, sans-serif;
+    letter-spacing: 3px;
+}
+
+
+/* sudoku board */
+
+table {
+    width: 50%;
+    height: 50%;
+    padding: 5px;
+    margin: 0px;
+}
+
+tr {
+    font-family: Baloo 2, Helvetica, sans-serif;
+    margin: 0px;
+}
+
+
+td:nth-child(3n) {
+    border-right: 2px solid black;
+}
+
+tr:nth-child(3n) td {
+    border-bottom: 2px solid black;
+}
+
+td {
+    height: 10px;
+    width: 10px;
+    margin: 0px;
+    padding: 2px;
+    text-align: center;
+    border-right: 2px solid gray;
+    border-bottom: 2px solid gray;
+}
+
+
+td:nth-last-of-type(9n) {
+    border-left: none;
+}
+
+tr:nth-child(9) td{
+    border-bottom: none;
+}
+
+tr:nth-child(1) td{
+    border-top: none;
+}
+
+td:nth-last-of-type(9n+1) {
+    border-right: none;
+}
+
+
+/* buttons */
+
+aside {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+    font-family: fantasy;
+}
+
+button:hover {
+    color: green;
+}
+
+button:visited {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
