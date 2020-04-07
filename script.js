@@ -194,14 +194,11 @@ function solve(sudoku) {
 // END OF Emanuele Feronato's CODE
 
 
-
-
-
 // Defining global variables of the 3 boards
 let totalBoardSolution = newSudoku;
-console.log(totalBoardSolution);
 let emptyBoard = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 let revealedBoard = [];
+console.log(totalBoardSolution);
 
 // Choosing and displaying the revealed numbers on the board 
 for (let i = 0; i < totalBoardSolution.length; i++) {
@@ -218,74 +215,111 @@ console.log(revealedBoard);
 
 // PLAYING CODE
 
-
-
 // CLICKING THE NUMERAL BUTTONS
 	// this determines what number is currently being used 
-	let currentOperation = 1;
+	let currentOperation = -1;
 	// this gets all the buttons
 	const numButtons = document.querySelectorAll('.numerals');
-	 numButtons[0].addEventListener('click', event => {
+	 
+	for (i = 0; i < 9; i++) {
+		numButtons[i].onclick = function (){
+			currentOperation = event.target.id;
+			console.log(currentOperation);
+			updateCurrentButton(currentOperation);
+		}
+	}
+	/* numButtons[0].addEventListener('click', event => {
 	  currentOperation = event.target.id;
 		console.log(currentOperation);
+		updateCurrentButton(currentOperation);
 	});
 	 numButtons[1].addEventListener('click', event => {
 	  currentOperation = event.target.id;
 		console.log(currentOperation);
+		updateCurrentButton(currentOperation);
 	});
 	 numButtons[2].addEventListener('click', event => {
 	  currentOperation = event.target.id;
 		console.log(currentOperation);
+		updateCurrentButton(currentOperation);
 	});
 	 numButtons[3].addEventListener('click', event => {
 	  currentOperation = event.target.id;
 		console.log(currentOperation);
+		updateCurrentButton(currentOperation);
 	});
 	 numButtons[4].addEventListener('click', event => {
 	  currentOperation = event.target.id;
 		console.log(currentOperation);
+		updateCurrentButton(currentOperation);
 	});
 	 numButtons[5].addEventListener('click', event => {
 	  currentOperation = event.target.id;
 		console.log(currentOperation);
+		updateCurrentButton(currentOperation);
 	});
 	 numButtons[6].addEventListener('click', event => {
 	  currentOperation = event.target.id;
 		console.log(currentOperation);
+		updateCurrentButton(currentOperation);
 	});
 	 numButtons[7].addEventListener('click', event => {
 	  currentOperation = event.target.id;
 		console.log(currentOperation);
+		updateCurrentButton(currentOperation);
 	});
 	 numButtons[8].addEventListener('click', event => {
 	  currentOperation = event.target.id;
 		console.log(currentOperation);
-	});
+		updateCurrentButton(currentOperation);
+	}); */
 
-// CLICKING THE ERASER/PENCIL BUTTONS
+// CLICKING THE X BUTTON
 const writingButtons = document.querySelectorAll('.writing');
 let currentUtensil = 0;
  writingButtons[0].addEventListener('click', event => {
-  currentUtensil = event.target.id;
+  currentUtensil++;
 	console.log(currentUtensil);
-});
- writingButtons[1].addEventListener('click', event => {
-  currentUtensil = event.target.id;
-	console.log(currentUtensil);
+	updateCurrentButton(0);
 });
 
+function updateCurrentButton(currentButton) {
+	let buttons = document.querySelectorAll("button.numerals, button.writing");
+	if (currentButton == 0) {
+		if (currentUtensil%2 == 1) {
+			buttons[9].style.backgroundColor = "red";
+		} else {
+			buttons[9].style.backgroundColor = "white";
+		}
+	} else {
+		for (i = 0; i < 9; i++) {
+			buttons[i].style.backgroundColor = "white";
+		}
+		buttons[currentButton-1].style.backgroundColor = "red";
+	}
+}
+
+let cell = document.querySelectorAll("td");
+for (let i = 0; i < cell.length; i++) {
+	cell[i].onclick = function() {
+		updateBoxClicked(this.id);
+		console.log(this.id);
+	}
+}
 
 // this updates the box depending on which number is clicked: first determines if the box is revealed, then updates depending on if the pen or eraser is selected
 function updateBoxClicked(boxNumber) {
 	  if (revealedBoard[boxNumber] == 0) {
-      if (currentUtensil == 0)  {
-        emptyBoard[boxNumber] = currentOperation;
+      if (currentUtensil%2 == 0)  {
+		  if (currentOperation > 0) {
+        		emptyBoard[boxNumber] = currentOperation;
 				emptyBoard = emptyBoard.map(Number);
 				console.log(emptyBoard);
 				document.getElementById(boxNumber).innerHTML = currentOperation;
-				document.getElementById(boxNumber).style.backgroundColor = 'white';
-     } else {
+				document.getElementById(boxNumber).style.backgroundColor = none;
+     }} else {
 				document.getElementById(boxNumber).innerHTML = "";
+				emptyBoard[boxNumber] = "";
   }
  }
 }
@@ -316,31 +350,24 @@ function checking() {
 			}
 	}
 	if (checkCorrect == emptyCheckCorrect) {
-
-		console.log('YAY good job');
+		alert("CONGRATS REPLACE WITH SOMETHING LATER");
 	} else {
 		console.log('oopsie, look at the red');
 	}
 }
 
 
-/* let cell = document.getElementsByTagName("td");
-		cell[i].addEventListener('click', function() {
-        updateBoxClicked(this.id);
-				console.log(this.id);
-    });
-	var x = document.getElementsByTagName("P");
-for (let i = 0; i < x.length; i++) {
-  x[i].style.backgroundColor = "red";
-}	 */
 
+/* OG
 let cell = document.getElementsByTagName("td");
 const cellCount = cell.length;
-for (let i = 0; i <= cellCount; i += 1) {
-	let cellReplacement = cell[i];	
-	cellReplacement.addEventListener('click', function() {
+for (let i = 0; i <= cellCount; i += 1) {	
+	cell[i].addEventListener('click', function() {
         updateBoxClicked(this.id);
 				console.log(this.id);
     });
 }
+*/
+
+
 
